@@ -5,7 +5,6 @@ angular.module('NameApp')
         const messages = [];
         const channel = new BroadcastChannel('chat_channel');
 
-        // Обработчик входящих сообщений из других вкладок
         channel.onmessage = (event) => {
             const message = event.data;
             if (!messages.some(m => m.id === message.id)) {
@@ -16,11 +15,9 @@ angular.module('NameApp')
 
         return {
             sendMessage: function(message) {
-                // Генерируем уникальный ID
                 message.id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
                 messages.push(message);
                 messageSubject.next(message);
-                // Отправляем сообщение в другие вкладки
                 channel.postMessage(message);
             },
 
@@ -43,7 +40,6 @@ angular.module('NameApp')
                 this.sendMessage(welcomeMsg);
             },
 
-            // Закрываем канал при уничтожении сервиса
             destroy: function() {
                 channel.close();
             }

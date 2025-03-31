@@ -1,7 +1,7 @@
 angular.module('NameApp')
     .service('UserService', ['$window', '$location', function($window, $location) {
         const USERNAME_KEY = 'chat_username';
-        let channel = null; // Делаем канал переиспользуемым
+        let channel = null;
 
         const getChannel = () => {
             if (!channel || channel.readyState === 'closed') {
@@ -24,7 +24,6 @@ angular.module('NameApp')
                     });
                 } catch (e) {
                     console.error('Ошибка отправки сообщения:', e);
-                    // Автоматически восстанавливаем соединение
                     channel = new BroadcastChannel('user_channel');
                 }
                 $location.path('/chat');
@@ -42,12 +41,6 @@ angular.module('NameApp')
                     console.error('Ошибка отправки сообщения:', e);
                 }
                 $location.path('/name');
-            },
-
-            subscribe: function(callback) {
-                getChannel().onmessage = function(event) {
-                    callback(event.data);
-                };
             },
 
             destroy: function() {

@@ -2,9 +2,6 @@
   "name": "angular",
   "version": "1.0.0",
   "main": "app.js",
-  "scripts": {
-    "start": "http-server -c60 -o /name"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",

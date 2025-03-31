@@ -7,12 +7,10 @@ angular.module('NameApp')
             vm.messages = [];
             vm.isConnected = true;
 
-            // Инициализация чата
             vm.initChat = function() {
                 MessageService.connect();
                 vm.messages = MessageService.getHistory();
 
-                // Подписка на новые сообщения
                 const subscription = MessageService.onMessage().subscribe(function(message) {
                     $scope.$applyAsync(() => {
                         if (!vm.messages.some(m => m.id === message.id)) {
@@ -21,13 +19,11 @@ angular.module('NameApp')
                     });
                 });
 
-                // Очистка при закрытии вкладки
                 $window.addEventListener('beforeunload', function() {
                     subscription.unsubscribe();
                 });
             };
 
-            // Отправка сообщения
             vm.sendMessage = function() {
                 if (!vm.newMessage.trim()) return;
 
@@ -41,7 +37,6 @@ angular.module('NameApp')
                 vm.newMessage = '';
             };
 
-            // Смена имени пользователя
             vm.changeName = function() {
                 MessageService.sendMessage({
                     author: 'Система',
