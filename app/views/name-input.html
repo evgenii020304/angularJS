@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="NameApp" ng-cloak>
+<head>
+    <title>User</title>
+    <meta charset="utf-8">
+</head>
+<div class="name-input-container" ng-controller="NameInputController as $ctrl">
+    <div class="name-input-form">
+        <h2>Добро пожаловать в чат!</h2>
+        <p>Пожалуйста, введите ваше имя:</p>
+        <md-input-container>
+            <label>Ваше имя</label>
+            <input ng-model="$ctrl.username" required autofocus
+                   ng-keypress="$event.keyCode === 13 && $ctrl.saveName()">
+        </md-input-container>
+        <md-button ng-click="$ctrl.saveName()"
+                   ng-disabled="!$ctrl.username || !$ctrl.username.trim()"
+                   class="md-primary md-raised">
+            Перейти в чат
+        </md-button>
+    </div>
+</div>
+</html>

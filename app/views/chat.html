@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="NameApp" ng-cloak>
+<head>
+    <title>Chat</title>
+    <meta charset="utf-8">
+</head>
+<div class="chat-container" ng-if="$ctrl.isConnected">
+    <header>
+        <h1>Чат</h1>
+        <div class="user-info">
+            <span>Вы вошли как: <strong>{{ $ctrl.currentUser }}</strong></span>
+            <md-button ng-click="$ctrl.changeName()" class="md-primary md-raised">
+                Сменить имя
+            </md-button>
+        </div>
+    </header>
+
+    <div class="messages-container">
+        <div class="message"
+             ng-repeat="message in $ctrl.messages track by message.id"
+             ng-class="{'system-message': message.isSystem}">
+            <div class="message-header">
+                <span class="author">{{ message.author }}</span>
+                <span class="timestamp">{{ message.timestamp | date:'HH:mm:ss' }}</span>
+            </div>
+            <div class="message-text">{{ message.text }}</div>
+        </div>
+    </div>
+
+    <div class="message-input">
+        <md-input-container class="full-width">
+            <label>Ваше сообщение</label>
+            <input ng-model="$ctrl.newMessage"
+                   ng-keypress="$event.keyCode === 13 && $ctrl.sendMessage()"
+                   placeholder="Введите сообщение...">
+        </md-input-container>
+        <md-button ng-click="$ctrl.sendMessage()"
+                   ng-disabled="!$ctrl.newMessage.trim()">
+            Отправить
+        </md-button>
+    </div>
+</div>
+</html>

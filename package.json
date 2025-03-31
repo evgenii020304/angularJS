@@ -1,0 +1,24 @@
+{
+  "name": "angular",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "http-server -c60 -o /name"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "angular": "^1.6.10",
+    "angular-animate": "^1.8.3",
+    "angular-aria": "^1.8.3",
+    "angular-i18n": "^1.8.3",
+    "angular-material": "^0.8.0",
+    "angular-route": "^1.8.3",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "open-cli": "^8.0.0"
+  }
+}
